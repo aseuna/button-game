@@ -57,10 +57,11 @@ app.post('/api/button_game', async (req, res) => {
 
 });
 // directs every http get request to the main page
+/*
 app.get('*', (req,res) =>{
     console.log(res);
-    res.sendFile(path.join(__dirname + '/../dist/index.html'));
-});
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+});*/
 
 var server = app.listen(process.env.SPORT, function() {
     var host = server.address().address;
