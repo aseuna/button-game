@@ -30,7 +30,7 @@ CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
 
 ## Installing node modules and running development server and building vue project
 
-- Run command node install at the project root to install node modules
+- Run command npm install at the project root to install node modules
 - When running development server for vue project:
     - Run command node server.js
     - Open another terminal/command promt instance and run command npm run serve
