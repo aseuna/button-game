@@ -13,7 +13,8 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 const pool = new Pool({
-    connectionString: process.env.CONNECTIONSTRING
+    connectionString: process.env.CONNECTIONSTRING,
+    ssl: true
 });
 
 app.post('/api/button_game', async (req, res) => {
