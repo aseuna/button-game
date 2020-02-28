@@ -21,8 +21,9 @@ INSERT INTO bg_num (total_number) VALUES (0);
 \q -- disconnects from the database server
 ```
 - you can modify table and column names, but the changes must be reflected in the database queries in the code
-- add .env -file to the project root and add following line in the file:
+- add .env -file to the project root and add following lines in the file:
 ```
+PORT=3000
 CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
 ```
 - replace login credentials to the connection string (without quotation marks), for example "user" is by default postgres
