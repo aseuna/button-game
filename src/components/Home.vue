@@ -45,7 +45,7 @@ export default {
             // sending http post request to backend
             // post request inform server that the button has been pressed
 
-            axios.post('/api/button_game')
+            axios.post(process.env.VUE_APP_API_URI || '/api/button_game')
             .then((response) => {
 
                 // functionality when incresing the number was succesful

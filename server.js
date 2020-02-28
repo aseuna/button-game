@@ -17,7 +17,7 @@ app.use(serveStatic(path.join(__dirname, 'dist')));
 
 const pool = new Pool({
     connectionString: process.env.CONNECTIONSTRING,
-    ssl: true
+    ssl: process.env.SSL || false
 });
 
 app.post('/api/button_game', async (req, res) => {
