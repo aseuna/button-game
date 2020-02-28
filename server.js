@@ -26,6 +26,7 @@ app.post('/api/button_game', async (req, res) => {
     try {
         const result = await pool.query(text)
         console.log(result[1].rows[0].total_number);
+        // 
         if(result[1].rows[0].total_number % 500 === 0){
             bonus_points = 250;
         }else if(result[1].rows[0].total_number % 100 === 0){
@@ -38,6 +39,7 @@ app.post('/api/button_game', async (req, res) => {
 
         distance = 10 - result[1].rows[0].total_number % 10;
 
+        // json to send relevant information back to the client
         const j = {
             incrementation: "SUCCESS",
             bonus_points: bonus_points,
@@ -54,7 +56,7 @@ app.post('/api/button_game', async (req, res) => {
     }
 
 });
-
+// directs every http get request to the main page
 app.get('*', (req,res) =>{
     console.log(res);
     res.sendFile(path.join(__dirname + '/../dist/index.html'));

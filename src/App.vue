@@ -22,8 +22,8 @@ export default {
     Home
   },
   computed: {
+    // Configuration for rules popover
     popoverContent: function(){
-
       return{
         html: true,
         content: () =>{

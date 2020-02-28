@@ -36,13 +36,14 @@ export default {
         }
     },
     mounted(){
+        // fetches variables from localstorage
         if(localStorage.remainingClicks) this.remainingClicks = localStorage.remainingClicks;
         if(localStorage.buttonDisabled) this.buttonDisabled = (localStorage.buttonDisabled == "true");
     },
     methods:{
         spendPoint: function(){
-
             // sending http post request to backend
+            // post request inform server that the button has been pressed
             const config = {
                 method: 'POST',
                 headers: {
@@ -54,6 +55,7 @@ export default {
             .then(response => response.json())
             .then(data => {
 
+                // functionality when incresing the number was succesful
                 if(data.incrementation === "SUCCESS"){
                     
                     // popup toast to inform user of the distance to the next winning number
@@ -75,6 +77,7 @@ export default {
                     });
                     this.$bvToast.show();
 
+                    // lower player points and adding possible bonus points
                     this.remainingClicks = this.remainingClicks - 1;
                     this.remainingClicks = this.remainingClicks + data.bonus_points; // data.bonus_points can be 0
 
@@ -98,8 +101,9 @@ export default {
                         });
                         this.$bvToast.show();
                     }
+                // functionality when incresing the number failed
                 }else{
-                    // Informs user if connection to database has failed
+                    // Informs wit ha popup toast user if connection to database has failed
                     const h = this.$createElement;
                     const dangerMsg = h(
                         'p',
@@ -110,7 +114,7 @@ export default {
                     );
                     this.$bvToast.toast([dangerMsg], {
                     title: "Alert!",
-                    toaster: "b-toaster-top-right",
+                    toaster: "b-toaster-bottom-right",
                     variant: "danger",
                     solid: false,
                     appendToast: false,
@@ -123,10 +127,12 @@ export default {
                 console.log(error);
             });
         },
+        // gives player 20 points
         refreshPoints: function(){
             this.remainingClicks = 20;
         }
     },
+    // watchers for variables that track remaining clicks and wheter button is disabled
     watch: {
         remainingClicks: function(clicks) {
             localStorage.remainingClicks = clicks;
