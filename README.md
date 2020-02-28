@@ -25,6 +25,7 @@ INSERT INTO bg_num (total_number) VALUES (0);
 ```
 PORT=3000
 CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
+VUE_APP_API_URI='http://localhost:3000/api/button_game'
 ```
 - replace login credentials to the connection string (without quotation marks), for example "user" is by default postgres
 - if you test locally "host" is most likely localhost
@@ -34,7 +35,7 @@ CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
 - Run command npm install at the project root to install node modules
 - When running development server for vue project:
     - Run command node server.js
-    - Open another terminal/command promt instance and run command npm run serve
+    - Open another terminal/command prompt instance and run command npm run serve
     - Open browser and type dev server address in the address bar
 - When building vue project
     - Run command npm run build
