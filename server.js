@@ -64,7 +64,7 @@ app.get('*', (req,res) =>{
 });*/
 
 var server = app.listen(process.env.SPORT, function() {
-    var host = server.address().address;
+    var host = process.env.HOST;
     var port = server.address().port;
     console.log('Example app listening at http://%s:%s', host, port);
 
