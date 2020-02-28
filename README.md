@@ -4,8 +4,8 @@ Showcase application. The application uses PostgreSQL server database to store t
 
 ## Prerequisites for running web application locally
 
-Nodejs installed, version 12.13.1 or higher
-PostgreSQL server installed, version 12.2 or higher
+- Nodejs installed, version 12.13.1 or higher
+- PostgreSQL server installed, version 12.2 or higher
 
 ## Setting up PostgreSQL server
 
