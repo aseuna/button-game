@@ -1,4 +1,6 @@
 const express = require('express');
+const serveStatic = require('serve-static');
+const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
@@ -9,8 +11,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+//var distDir = __dirname + "/dist/";
+//app.use(express.static(distDir));
+app.use(serveStatic(path.join(__dirname, 'dist')));
 
 const pool = new Pool({
     connectionString: process.env.CONNECTIONSTRING,
@@ -58,10 +61,10 @@ app.post('/api/button_game', async (req, res) => {
 
 });
 // directs http get request to the main page
-app.get('/', (req,res) =>{
+/*app.get('/', (req,res) =>{
     console.log(res);
     res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
+});*/
 
 var server = app.listen(process.env.SPORT, function() {
     var port = server.address().port;
