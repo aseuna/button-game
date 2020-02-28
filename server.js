@@ -56,16 +56,13 @@ app.post('/api/button_game', async (req, res) => {
     }
 
 });
-// directs every http get request to the main page
-/*
-app.get('*', (req,res) =>{
+// directs http get request to the main page
+app.get('/', (req,res) =>{
     console.log(res);
     res.sendFile(path.join(__dirname + '/dist/index.html'));
-});*/
+});
 
 var server = app.listen(process.env.SPORT, function() {
-    var host = process.env.HOST;
     var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port);
-
+    console.log('Example app listening at port %s', port);
 });

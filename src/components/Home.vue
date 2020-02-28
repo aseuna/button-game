@@ -21,7 +21,7 @@
 </template>
 
 <script>
-//const Swal = require('sweetalert2');
+const axios = require('axios');
 
 export default {
     name: 'MainView',
@@ -44,19 +44,12 @@ export default {
         spendPoint: function(){
             // sending http post request to backend
             // post request inform server that the button has been pressed
-            const config = {
-                method: 'POST',
-                headers: {
-                    'content-type':'application/json'
-                }
-            };
 
-            fetch('http://localhost:3000/api/button_game', config)
-            .then(response => response.json())
-            .then(data => {
+            axios.post('/api/button_game')
+            .then((response) => {
 
                 // functionality when incresing the number was succesful
-                if(data.incrementation === "SUCCESS"){
+                if(response.data.incrementation === "SUCCESS"){
                     
                     // popup toast to inform user of the distance to the next winning number
                     const t = this.$createElement;
@@ -64,7 +57,7 @@ export default {
                         'p',
                         { class: ['text-center', 'mb-0'] },
                         [
-                            t("strong",{}, "Next winning number is " + data.distance + " clicks away!")
+                            t("strong",{}, "Next winning number is " + response.data.distance + " clicks away!")
                         ]
                     );
                     this.$bvToast.toast([infoMsg], {
@@ -79,16 +72,16 @@ export default {
 
                     // lower player points and adding possible bonus points
                     this.remainingClicks = this.remainingClicks - 1;
-                    this.remainingClicks = this.remainingClicks + data.bonus_points; // data.bonus_points can be 0
+                    this.remainingClicks = this.remainingClicks + response.data.bonus_points; // data.bonus_points can be 0
 
                     // If user gained bonus points, create a popup toast to inform user
-                    if(data.bonus_points !== 0){
+                    if(response.data.bonus_points !== 0){
                         const h = this.$createElement;
                         const successMsg = h(
                             'p',
                             { class: ['text-center', 'mb-0'] },
                             [
-                                h("strong",{}, "You gained additional " + data.bonus_points + " points!")
+                                h("strong",{}, "You gained additional " + response.data.bonus_points + " points!")
                             ]
                         );
                         this.$bvToast.toast([successMsg], {
