@@ -4,8 +4,8 @@ Showcase application. The application uses PostgreSQL server database to store t
 
 ## Prerequisites for running web application locally
 
-Nodejs installed, version 12.13.1 or higher
-PostgreSQL server installed, version 12.2 or higher
+- Nodejs installed, version 12.13.1 or higher
+- PostgreSQL server installed, version 12.2 or higher
 
 ## Setting up PostgreSQL server
 
@@ -21,8 +21,9 @@ INSERT INTO bg_num (total_number) VALUES (0);
 \q -- disconnects from the database server
 ```
 - you can modify table and column names, but the changes must be reflected in the database queries in the code
-- add .env -file to the project root and add following line in the file:
+- add .env -file to the project root and add following lines in the file:
 ```
+PORT=3000
 CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
 ```
 - replace login credentials to the connection string (without quotation marks), for example "user" is by default postgres
@@ -30,7 +31,7 @@ CONNECTIONSTRING='postgresql://"user":"password"@"host":"port"/"database_name"'
 
 ## Installing node modules and running development server and building vue project
 
-- Run command node install at the project root to install node modules
+- Run command npm install at the project root to install node modules
 - When running development server for vue project:
     - Run command node server.js
     - Open another terminal/command promt instance and run command npm run serve
