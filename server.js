@@ -9,42 +9,56 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-//var distDir = __dirname + "/dist/";
-//app.use(express.static(distDir));
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
 
 const pool = new Pool({
     connectionString: process.env.CONNECTIONSTRING
 });
 
 app.post('/api/button_game', async (req, res) => {
-
-    // IMPLEMENT NESTED QUERY
-    const text = 'UPDATE bg_num SET total_number = total_number + 1 WHERE id = 1;';
-    //const text = 'SELECT * FROM bg_num;';
+    // the amount of bonus points give to the player based on the total number
+    let bonus_points = 0;
+    // distance to next winning value
+    let distance = 0;
+    // query to update the total number of clicks and then select the result
+    const text = 'UPDATE bg_num SET total_number = total_number + 1 WHERE id = 1; SELECT * FROM bg_num;';
     try {
         const result = await pool.query(text)
+        console.log(result[1].rows[0].total_number);
+        if(result[1].rows[0].total_number % 500 === 0){
+            bonus_points = 250;
+        }else if(result[1].rows[0].total_number % 100 === 0){
+            bonus_points = 40;
+        }else if(result[1].rows[0].total_number % 10 === 0){
+            bonus_points = 5;
+        }else{
+            bonus_points = 0;
+        }
 
-        console.log(result);
+        distance = 10 - result[1].rows[0].total_number % 10;
 
         const j = {
-            incrementation: "SUCCESS"
+            incrementation: "SUCCESS",
+            bonus_points: bonus_points,
+            distance: distance
         }
         res.json(j);
     } catch (err) {
         console.log(err.stack)
         const j = {
-            incrementation: "FAILURE"
+            incrementation: "FAILURE",
+            bonus_points: 0
         }
         res.json(j);
     }
 
 });
 
-/*
 app.get('*', (req,res) =>{
     console.log(res);
-    res.sendFile(path.join(__dirname+'/../dist/index.html'));
-});*/
+    res.sendFile(path.join(__dirname + '/../dist/index.html'));
+});
 
 var server = app.listen(process.env.SPORT, function() {
     var host = server.address().address;
