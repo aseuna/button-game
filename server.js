@@ -66,7 +66,7 @@ app.post('/api/button_game', async (req, res) => {
     res.sendFile(path.join(__dirname + '/dist/index.html'));
 });*/
 
-var server = app.listen(process.env.SPORT, function() {
+var server = app.listen(process.env.PORT, process.env.HOST, function() {
     var port = server.address().port;
     console.log('Example app listening at port %s', port);
 });
