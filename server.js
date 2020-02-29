@@ -28,7 +28,9 @@ app.post('/api/button_game', async (req, res) => {
     // query to update the total number of clicks and then select the result
     const text = 'UPDATE bg_num SET total_number = total_number + 1 WHERE id = 1; SELECT * FROM bg_num;';
     try {
-        const result = await pool.query(text)
+        const client = await pool.connect();
+        const result = await client.query(text);
+        client.release();
         console.log(result[1].rows[0].total_number);
         // 
         if(result[1].rows[0].total_number % 500 === 0){
