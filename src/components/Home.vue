@@ -70,7 +70,7 @@ export default {
                     });
                     this.$bvToast.show();
 
-                    // lower player points and adding possible bonus points
+                    // lower player points and add possible bonus points
                     this.remainingClicks = this.remainingClicks - 1;
                     this.remainingClicks = this.remainingClicks + response.data.bonus_points; // data.bonus_points can be 0
 

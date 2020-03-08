@@ -46,27 +46,22 @@ app.post('/api/button_game', async (req, res) => {
         distance = 10 - result[1].rows[0].total_number % 10;
 
         // json to send relevant information back to the client
-        const j = {
+        const resJson = {
             incrementation: "SUCCESS",
             bonus_points: bonus_points,
             distance: distance
         }
-        res.json(j);
+        res.json(resJson);
     } catch (err) {
         console.log(err.stack)
-        const j = {
+        const resJson = {
             incrementation: "FAILURE",
             bonus_points: 0
         }
-        res.json(j);
+        res.json(resJson);
     }
 
 });
-// directs http get request to the main page
-/*app.get('/', (req,res) =>{
-    console.log(res);
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-});*/
 
 var server = app.listen(process.env.PORT, process.env.HOST, function() {
     var port = server.address().port;

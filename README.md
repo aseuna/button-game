@@ -1,6 +1,11 @@
 # button-game
 
-Showcase application. The application uses PostgreSQL server database to store total number of clicks across all users. The server script connects the application to the database.
+Showcase web app for a job application.
+
+The application uses PostgreSQL server database to store total number of clicks across all users. The server script connects the application to the database.
+
+https://showcase-button-game.herokuapp.com/
+Application may be down...
 
 ## Prerequisites for running web application locally
 
