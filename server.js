@@ -11,8 +11,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-//var distDir = __dirname + "/dist/";
-//app.use(express.static(distDir));
 app.use(serveStatic(path.join(__dirname, 'dist')));
 
 const pool = new Pool({
@@ -32,7 +30,7 @@ app.post('/api/button_game', async (req, res) => {
         const result = await client.query(text);
         client.release();
         console.log(result[1].rows[0].total_number);
-        // 
+
         if(result[1].rows[0].total_number % 500 === 0){
             bonus_points = 250;
         }else if(result[1].rows[0].total_number % 100 === 0){
